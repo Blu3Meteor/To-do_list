@@ -5,8 +5,7 @@ const date = require(__dirname + '/date.js');
 console.log(date);
 
 // template lets
-const items = ["Buy food", "Cook food", "Eat food"];
-const workItems = [];
+const items = ["Add your first item for today"];
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -25,16 +24,8 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
-  const item = req.body.newItem;
-
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  }
-  else {
-    items.push(item);
-    res.redirect("/");
-  }
+  items.push(req.body.newItem);
+  res.redirect("/");
 })
 
 app.listen(process.env.PORT || 3000, function() {
